@@ -1,0 +1,29 @@
+server:
+  port: 9527
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
+spring:
+  application:
+    name: cloud-getway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: route
+#        uri: lb://CLOUD-PROVIDE-PAYMENT
+        uri: http://localhost:8001
+        predicates:
+         - Path=/payment/get/**
+
+      - id: route1
+        uri: lb://CLOUD-PROVIDE-PAYMENT
+        predicates:
+          - Path=/payment/lb
+          - After=2021-01-20T22:01:40.700+08:00[Asia/Shanghai]
+#          - Cookie=username,zwf
+

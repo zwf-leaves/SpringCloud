@@ -1,0 +1,14 @@
+server:
+  port: 83
+
+spring:
+  application:
+    name: cloudalibab-order-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+#消费者将要访问微服务的名称，（注册成功进nacos的微服务提供者）
+service-url:
+  nacos-user-service: http://cloudalibaba-provider-payment

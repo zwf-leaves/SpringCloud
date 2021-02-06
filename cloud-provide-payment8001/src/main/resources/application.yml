@@ -1,0 +1,43 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: cloud-provide-payment
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+#        采值率0~1之间
+      propability: 1
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/payment?serverTimezone=UTC
+    username: root
+    password: 666666
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+#      单机版
+      defaultZone: http://eureka7001.com:7001/eureka
+#      集群版
+#      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+  instance:
+    instance-id: payment8001
+#    访问路径可以显示ip地址
+    prefer-ip-address: true
+#    Eureka客户端向服务端发送心跳的时间间隔（默认是30秒）
+#    lease-renewal-interval-in-seconds: 1
+#    Eureka服务端在收到最后一次心跳后等待时间上限 ,单位为秒(默认是90秒),超时剔除服务
+#    lease-expiration-duration-in-seconds: 2
+
+
+
+mybatis:
+#  映射文件位置
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: zwf.springcloud.entities
